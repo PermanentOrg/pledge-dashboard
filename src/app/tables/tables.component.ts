@@ -28,7 +28,7 @@ export interface FirebasePledge {
 @Component({
     selector: 'app-tables',
     templateUrl: './tables.component.html',
-    styleUrls: ['./tables.component.css']
+    styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit, OnDestroy {
     public tableData1: TableData;
@@ -38,7 +38,7 @@ export class TablesComponent implements OnInit, OnDestroy {
     public page = 1;
 
     public currentSort = 'timestamp';
-    public reverseSort = false;
+    public reverseSort = true;
 
     public currentUser: string;
 
@@ -62,7 +62,7 @@ export class TablesComponent implements OnInit, OnDestroy {
             pledge.ref = snapshot.ref;
 
             this.zone.run(() => {
-                this.pledges.push(pledge);
+                this.pledges.unshift(pledge);
                 this.editData[pledge.id] = Object.assign({}, pledge);
             });
 

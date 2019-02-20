@@ -10,11 +10,14 @@
                     <div class="content table-responsive table-full-width">
                           <table class="table table-hover table-striped">
                                 <thead>
-                                    <tr>
-                                        <th (click)="sortPledges('timestamp')" class="pledge-date" [ngClass]="{'current-sort': currentSort === 'timestamp'}">Date</th>
-                                        <th (click)="sortPledges('dollarAmount')" class="pledge-amount" [ngClass]="{'current-sort': currentSort === 'dollarAmount'}">Amount</th>
-                                        <th (click)="sortPledges('name')" class="pledge-name" [ngClass]="{'current-sort': currentSort === 'name'}">Name</th>
-                                        <th (click)="sortPledges('email')" class="pledge-email" [ngClass]="{'current-sort': currentSort === 'email'}">Email</th>
+                                    <tr [ngClass]="{'reverse': reverseSort}">
+                                        <th (click)="sortPledges('timestamp')" class="pledge-date" [ngClass]="{'current-sort': currentSort === 'timestamp'}"><span>
+                                        Date
+                                        </span>
+                                        </th>
+                                        <th (click)="sortPledges('dollarAmount')" class="pledge-amount" [ngClass]="{'current-sort': currentSort === 'dollarAmount'}"><span>Amount</span></th>
+                                        <th (click)="sortPledges('name')" class="pledge-name" [ngClass]="{'current-sort': currentSort === 'name'}"><span>Name</span></th>
+                                        <th (click)="sortPledges('email')" class="pledge-email" [ngClass]="{'current-sort': currentSort === 'email'}"><span>Email</span></th>
                                         <th class="pledge-paid">Anon?</th>
                                         <th class="pledge-paid">Paid?</th>
                                         <th class="pledge-action"></th>

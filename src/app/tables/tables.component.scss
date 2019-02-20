@@ -11,11 +11,31 @@
 th {
     user-select: none;
     cursor: pointer;
+    span {
+        position: relative;
+    }
 }
 
 th:hover, th.current-sort {
     color: rgb(111,111,111);
 }
+
+.current-sort {
+    span::after {
+        content: '▲';
+        position: absolute;
+        right: -15px;
+        top: -1px;
+    }
+
+    .reverse & {
+        span::after {
+            content: '▼'
+        }
+    }
+}
+
+
 
 .table-pages button {
     margin: 0 10px;
@@ -65,3 +85,4 @@ tr.locked .pledge-locked::after{
     /* transform: translateY(-50%); */
     content: attr(data-editor);
 }
+
