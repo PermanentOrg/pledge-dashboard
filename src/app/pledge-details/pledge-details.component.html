@@ -5,7 +5,8 @@
   </div>
   <div class="content">
     <button class="btn btn-primary" *ngIf="pledge.editing !== currentUser"
-    [disabled]="pledge.editing && pledge.editing !== currentUser" (click)="startEditing()">Edit</button>
+    [disabled]="pledge.editing && pledge.editing !== currentUser" (click)="startEditing()">
+    {{!pledge.editing ? 'Edit' : 'Being edited by ' + pledge.editing}}</button>
     <button class="btn btn-primary" *ngIf="pledge.editing === currentUser"
       (click)="stopEditing(true)">Save</button>
     <button class="btn btn-secondary" *ngIf="pledge.editing === currentUser"
