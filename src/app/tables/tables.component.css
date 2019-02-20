@@ -1,0 +1,63 @@
+.content.table-full-width {
+    padding-bottom: 0px;
+}
+
+.table-pages {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+th {
+    user-select: none;
+    cursor: pointer;
+}
+
+th:hover, th.current-sort {
+    color: rgb(111,111,111);
+}
+
+.table-pages button {
+    margin: 0 10px;
+}
+
+.pledge-date {
+    width: 10em;
+}
+
+.pledge-amount {
+    width: 10em;
+}
+
+.pledge-name {
+    width: 20em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pledge-action {
+    width: 10em;
+    text-align: center;
+}
+
+.pledge-locked {
+    width: 0;
+    position: relative;
+}
+
+tr.locked {
+    position: relative;
+}
+
+tr.locked > td:not(.pledge-locked) {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+tr.locked .pledge-locked::after{
+    position: absolute;
+    /* right: 10px; */
+    /* top: 50%; */
+    /* transform: translateY(-50%); */
+    content: attr(data-editor);
+}

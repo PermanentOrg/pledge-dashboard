@@ -1,0 +1,70 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Pledges</h4>
+                        <!-- <p class="category">Here is a subtitle for this table</p> -->
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                          <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th (click)="sortPledges('timestamp')" class="pledge-date" [ngClass]="{'current-sort': currentSort === 'timestamp'}">Date</th>
+                                        <th (click)="sortPledges('dollarAmount')" class="pledge-amount" [ngClass]="{'current-sort': currentSort === 'dollarAmount'}">Amount</th>
+                                        <th (click)="sortPledges('name')" class="pledge-name" [ngClass]="{'current-sort': currentSort === 'name'}">Name</th>
+                                        <th (click)="sortPledges('email')" class="pledge-email" [ngClass]="{'current-sort': currentSort === 'email'}">Email</th>
+                                        <th class="pledge-paid">Paid?</th>
+                                        <th class="pledge-action"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let pledge of pledges | paginate: { itemsPerPage: 10, currentPage: page }"
+                                        [ngClass]="{'locked': pledge.editing && pledge.editing !== currentUser}" (click)="onPledgeRowClick(pledge)">
+                                        <td class="pledge-date">
+                                            <span>{{pledge.timestamp | date }}</span>
+                                        </td>
+                                        <td class="pledge-amount">
+                                            <span *ngIf="pledge.editing !== currentUser">{{pledge.dollarAmount | currency}}</span>
+                                            <input class="form-control" type="number" [(ngModel)]="editData[pledge.id].dollarAmount" *ngIf="pledge.editing === currentUser && editData[pledge.id]">
+                                        </td>
+                                        <td class="pledge-name">
+                                            <span *ngIf="pledge.editing !== currentUser">{{pledge.name}}</span>
+                                            <input class="form-control" type="text" [(ngModel)]="editData[pledge.id].name" *ngIf="pledge.editing === currentUser && editData[pledge.id]">
+                                        </td>
+                                        <td class="pledge-email">
+                                            <span *ngIf="pledge.editing !== currentUser">{{pledge.email}}</span>
+                                            <input class="form-control" type="text" [(ngModel)]="editData[pledge.id].email" *ngIf="pledge.editing === currentUser && editData[pledge.id]">
+                                        </td>
+                                        <td class="pledge-paid">
+                                            <input type="checkbox" *ngIf="pledge.editing !== currentUser" disabled [(ngModel)]="pledge.noCharge">
+                                            <input type="checkbox" *ngIf="pledge.editing === currentUser" [(ngModel)]="editData[pledge.id].noCharge">
+                                        </td>
+                                        <td class="pledge-action">
+                                            <button class="btn btn-primary" *ngIf="pledge.editing !== currentUser" (click)="startEditing(pledge)" [disabled]="pledge.editing">Edit</button>
+                                            <button class="btn btn-primary" *ngIf="pledge.editing === currentUser" (click)="stopEditing(pledge, true)">Save</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                          </table>
+                    </div>
+
+                </div>
+                <div class="table-pages">
+                    <pagination-template #p="paginationApi"
+                        (pageChange)="page = $event" maxSize="7">
+                        <button class="btn" [disabled]="p.isFirstPage()"
+                            (click)="p.previous()"><<</button>
+                        <button class="btn" *ngFor="let page of p.pages"
+                            (click)="p.setCurrent(page.value)" [disabled]="p.getCurrent() === page.value">
+                            {{page.label}}
+                        </button>
+                        <button class="btn" [disabled]="p.isLastPage()"
+                            (click)="p.next()">>></button>
+                    </pagination-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
