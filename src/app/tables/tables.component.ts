@@ -4,6 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { orderBy, debounce } from 'lodash';
 import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
+import { eventNames } from 'cluster';
 
 declare interface TableData {
     headerRow: string[];
@@ -84,8 +85,9 @@ export class TablesComponent implements OnInit, OnDestroy {
         };
     }
 
-    onPledgeRowClick(pledge) {
+    onPledgeRowClick(pledge, event: MouseEvent) {
         this.router.navigate(['/pledges', pledge.id]);
+        return false;
     }
 
     sortPledges(sort) {
@@ -144,7 +146,8 @@ export class TablesComponent implements OnInit, OnDestroy {
         this.page++;
     }
 
-    startEditing(pledge: FirebasePledge) {
+    startEditing(pledge: FirebasePledge, event: MouseEvent) {
+        event.stopPropagation();
         pledge.editing = this.currentUser;
         pledge.ref.update({
             editing: this.currentUser
@@ -156,7 +159,8 @@ export class TablesComponent implements OnInit, OnDestroy {
 
     }
 
-    stopEditing(pledge: FirebasePledge, save = false) {
+    stopEditing(pledge: FirebasePledge, save = false, event: MouseEvent) {
+        event.stopPropagation();
         if (!save) {
             pledge.ref.update({
                 editing: false

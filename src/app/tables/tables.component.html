@@ -47,8 +47,8 @@
                                             <input type="checkbox" *ngIf="pledge.editing === currentUser" [(ngModel)]="editData[pledge.id].noCharge">
                                         </td>
                                         <td class="pledge-action">
-                                            <button class="btn btn-primary" *ngIf="pledge.editing !== currentUser" (click)="startEditing(pledge)" [disabled]="pledge.editing">Edit</button>
-                                            <button class="btn btn-primary" *ngIf="pledge.editing === currentUser" (click)="stopEditing(pledge, true)">Save</button>
+                                            <button class="btn btn-primary" *ngIf="pledge.editing !== currentUser" (click)="startEditing(pledge, $event)" [disabled]="pledge.editing">Edit</button>
+                                            <button class="btn btn-primary" *ngIf="pledge.editing === currentUser" (click)="stopEditing(pledge, true, $event)">Save</button>
                                         </td>
                                     </tr>
                                 </tbody>

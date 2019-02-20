@@ -45,6 +45,10 @@ th:hover, th.current-sort {
     position: relative;
 }
 
+tr:not(.locked) {
+    cursor: pointer;
+}
+
 tr.locked {
     position: relative;
 }
