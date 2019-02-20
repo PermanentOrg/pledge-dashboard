@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { LbdModule } from '../../lbd/lbd.module';
 import { NguiMapModule} from '@ngui/map';
@@ -39,7 +40,8 @@ import { PledgeResolveService } from 'app/resolves/pledge-resolve.service';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    PledgeDetailsComponent
+    PledgeDetailsComponent,
+    TimeAgoPipe
   ],
   providers: [
     PledgeResolveService

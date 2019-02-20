@@ -1,7 +1,7 @@
 <div class="card">
   <div class="header">
     <h4 class="title">{{pledge.name}}</h4>
-    <h5 class="title">X days ago</h5>
+    <h5 class="title">{{pledge.timestamp | timeAgo}}</h5>
   </div>
   <div class="content">
     <button class="btn btn-primary" *ngIf="pledge.editing !== currentUser"
@@ -42,7 +42,7 @@
     </div>
     <div class="footer">
       <hr>
-      {{pledge.timestamp | date:'long'}}
+      Pledge made at {{pledge.timestamp | date:'long'}}
     </div>
   </div>
 </div>
