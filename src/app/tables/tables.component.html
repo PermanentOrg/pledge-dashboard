@@ -22,7 +22,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let pledge of pledges | paginate: { itemsPerPage: 10, currentPage: page }"
-                                        [ngClass]="{'locked': pledge.editing && pledge.editing !== currentUser}" (click)="onPledgeRowClick(pledge)">
+                                        [ngClass]="{'locked': pledge.editing && pledge.editing !== currentUser}" (click)="onPledgeRowClick(pledge, $event)">
                                         <td class="pledge-date">
                                             <span>{{pledge.timestamp | date }}</span>
                                         </td>

@@ -86,8 +86,11 @@ export class TablesComponent implements OnInit, OnDestroy {
     }
 
     onPledgeRowClick(pledge, event: MouseEvent) {
+        const elemName = event.srcElement.localName;
+        if (elemName === 'input' || elemName === 'button') {
+            return;
+        }
         this.router.navigate(['/pledges', pledge.id]);
-        return false;
     }
 
     sortPledges(sort) {
