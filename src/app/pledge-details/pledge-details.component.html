@@ -38,7 +38,7 @@
     </div> -->
     <div class="form-group">
       <label>Notes</label>
-      <p class="form-control" *ngIf="pledge.editing !== currentUser">{{pledge.notes}}</p>
+      <p class="form-control" *ngIf="pledge.editing !== currentUser">{{pledge.notes || 'No notes'}}</p>
       <textarea class="form-control" rows="3" [(ngModel)]="editData.notes" *ngIf="pledge.editing === currentUser"></textarea>
     </div>
     <div class="footer">
