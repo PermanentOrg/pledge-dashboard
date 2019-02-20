@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 import { LbdModule } from '../../lbd/lbd.module';
 import { NguiMapModule} from '@ngui/map';
@@ -29,7 +30,8 @@ import { PledgeResolveService } from 'app/resolves/pledge-resolve.service';
     FormsModule,
     LbdModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'}),
-    NgxPaginationModule
+    NgxPaginationModule,
+    FilterPipeModule
   ],
   declarations: [
     HomeComponent,

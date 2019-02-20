@@ -42,6 +42,10 @@ export class TablesComponent implements OnInit, OnDestroy {
 
     public currentUser: string;
 
+    public filterTerm = {
+        name: null
+    };
+
     public editData = {};
 
     public onCloseHandler = function(e) {
