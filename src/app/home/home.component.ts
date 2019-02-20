@@ -1,5 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import Plotly from 'plotly.js-dist';
+import { Component, OnInit, NgZone, ViewChild, ElementRef, ContentChild, AfterViewInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { debounce } from 'lodash';
 import * as moment from 'moment';
@@ -18,7 +17,7 @@ export interface ProgressData {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   public progressData: ProgressData[] = [];
 
   public pledgesTodayCount = 0;
@@ -27,14 +26,28 @@ export class HomeComponent implements OnInit {
   public pledgesWeekCount = 0;
   public pledgesWeekDollarAmount = 0;
 
+  public pledgesChartData = {
+    x: [],
+    y: [],
+    type: 'scatter'
+  };
+  public pledgesChartConfig = {
+    displayModeBar: false
+  };
+
   public debouncedRecalculate = debounce(() => {
-    this.recalculateCharts();
+    this.zone.run(() => {
+      this.recalculateCharts();
+    })
   }, 100);
 
   constructor(
     private db: AngularFireDatabase,
     private zone: NgZone
   ) {
+  }
+
+  ngOnInit() {
     this.db.database.ref('/progress').on('child_added', snapshot => {
       const progress = snapshot.val() as ProgressData;
 
@@ -45,15 +58,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-
+  ngAfterViewInit() {
   }
 
   recalculateCharts() {
-    this.countPledgesToday();
+    this.countPledges();
+    this.updateCharts();
   }
 
-  countPledgesToday() {
+  updateCharts() {
+    this.pledgesChartData.x = this.progressData.map(progress => moment(progress.timestamp).toISOString());
+    this.pledgesChartData.y = this.progressData.map(progress => progress.totalDollarAmount);
+  }
+
+  countPledges() {
     const minus24h = moment().subtract(24, 'hours');
     const minus7d = moment().subtract(7, 'days');
     const pledgesToday = [];

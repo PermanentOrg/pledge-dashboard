@@ -9,6 +9,7 @@ import { LbdModule } from '../../lbd/lbd.module';
 import { NguiMapModule} from '@ngui/map';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
+import { PlotlyModule } from 'angular-plotly.js';
 
 import { HomeComponent } from '../../home/home.component';
 import { UserComponent } from '../../user/user.component';
@@ -31,7 +32,8 @@ import { PledgeResolveService } from 'app/resolves/pledge-resolve.service';
     LbdModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'}),
     NgxPaginationModule,
-    FilterPipeModule
+    FilterPipeModule,
+    PlotlyModule
   ],
   declarations: [
     HomeComponent,

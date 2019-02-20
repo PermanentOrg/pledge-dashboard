@@ -41,6 +41,16 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Pledges</h4>
+                    </div>
+                    <div class="content">
+                        <plotly-plot [data]="[pledgesChartData]" [config]="pledgesChartConfig" #pledgesChart></plotly-plot>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <!-- <div class="col-md-6">
