@@ -15,6 +15,7 @@
                                         <th (click)="sortPledges('dollarAmount')" class="pledge-amount" [ngClass]="{'current-sort': currentSort === 'dollarAmount'}">Amount</th>
                                         <th (click)="sortPledges('name')" class="pledge-name" [ngClass]="{'current-sort': currentSort === 'name'}">Name</th>
                                         <th (click)="sortPledges('email')" class="pledge-email" [ngClass]="{'current-sort': currentSort === 'email'}">Email</th>
+                                        <th class="pledge-paid">Anon?</th>
                                         <th class="pledge-paid">Paid?</th>
                                         <th class="pledge-action"></th>
                                     </tr>
@@ -36,6 +37,10 @@
                                         <td class="pledge-email">
                                             <span *ngIf="pledge.editing !== currentUser">{{pledge.email}}</span>
                                             <input class="form-control" type="text" [(ngModel)]="editData[pledge.id].email" *ngIf="pledge.editing === currentUser && editData[pledge.id]">
+                                        </td>
+                                        <td class="pledge-paid">
+                                            <input type="checkbox" *ngIf="pledge.editing !== currentUser" disabled [(ngModel)]="pledge.anonymous">
+                                            <input type="checkbox" *ngIf="pledge.editing === currentUser" [(ngModel)]="editData[pledge.id].anonymous">
                                         </td>
                                         <td class="pledge-paid">
                                             <input type="checkbox" *ngIf="pledge.editing !== currentUser" disabled [(ngModel)]="pledge.noCharge">

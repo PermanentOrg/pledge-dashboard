@@ -11,15 +11,17 @@ declare interface TableData {
 }
 
 
-interface FirebasePledge {
+export interface FirebasePledge {
     timestamp: number;
     name: string;
     email: string;
     dollarAmount: number;
+    anonymous?: boolean;
     noCharge?: boolean;
     id?: string;
     ref?: firebase.database.Reference;
-    editing?: string | boolean;
+    editing?: string | boolean | any;
+    notes?: string;
 }
 
 @Component({

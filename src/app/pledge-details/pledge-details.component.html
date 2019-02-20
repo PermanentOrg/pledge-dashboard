@@ -4,8 +4,42 @@
     <h5 class="title">X days ago</h5>
   </div>
   <div class="content">
-    <h5>{{pledge.dollarAmount | currency}}</h5>
-    <h5>{{pledge.email}}</h5>
+    <button class="btn btn-primary" *ngIf="pledge.editing !== currentUser"
+    [disabled]="pledge.editing && pledge.editing !== currentUser" (click)="startEditing()">Edit</button>
+    <button class="btn btn-primary" *ngIf="pledge.editing === currentUser"
+      (click)="stopEditing(true)">Save</button>
+    <button class="btn btn-secondary" *ngIf="pledge.editing === currentUser"
+      (click)="stopEditing(false)">Cancel</button>
+    <br><br>
+    <div class="form-group">
+      <label>Amount</label>
+      <div class="form-control" *ngIf="pledge.editing !== currentUser">{{pledge.dollarAmount | currency}}</div>
+      <input type="number" class="form-control" [(ngModel)]="editData.dollarAmount" *ngIf="pledge.editing === currentUser">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <div class="form-control" *ngIf="pledge.editing !== currentUser">{{pledge.email}}</div>
+      <input type="text" class="form-control" [(ngModel)]="editData.email" *ngIf="pledge.editing === currentUser">
+    </div>
+    <div class="form-group">
+      <label>Anonymous</label>
+      <input type="checkbox" [(ngModel)]="pledge.anonymous" *ngIf="pledge.editing !== currentUser" disabled>
+      <input type="checkbox" [(ngModel)]="editData.anonymous" *ngIf="pledge.editing === currentUser">
+    </div>
+    <div class="form-group">
+      <label>Paid?</label>
+      <input type="checkbox" [(ngModel)]="pledge.noCharge" *ngIf="pledge.editing !== currentUser" disabled>
+      <input type="checkbox" [(ngModel)]="editData.noCharge" *ngIf="pledge.editing === currentUser">
+    </div>
+    <!-- <div class="form-group">
+      <label>Account ID</label>
+      <div class="form-control">{{pledge.email}}</div>
+    </div> -->
+    <div class="form-group">
+      <label>Notes</label>
+      <p class="form-control" *ngIf="pledge.editing !== currentUser">{{pledge.notes}}</p>
+      <textarea class="form-control" rows="3" [(ngModel)]="editData.notes" *ngIf="pledge.editing === currentUser"></textarea>
+    </div>
     <div class="footer">
       <hr>
       {{pledge.timestamp | date:'long'}}
