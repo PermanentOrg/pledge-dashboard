@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     const loggedIn = await this.authService.logIn(formValue.email, formValue.password);
     this.waiting = false;
     if (loggedIn) {
-      this.router.navigate(['/pledges'])
+      this.router.navigate(['/dashboard'])
     } else {
       this.loginError = 'There was an error logging in - please try again.';
     }
