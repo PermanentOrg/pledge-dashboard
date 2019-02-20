@@ -31,7 +31,7 @@ th:hover, th.current-sort {
 
 .current-sort {
     span::after {
-        content: '▲';
+        content: '▼';
         position: absolute;
         right: -15px;
         top: -1px;
@@ -39,7 +39,7 @@ th:hover, th.current-sort {
 
     .reverse & {
         span::after {
-            content: '▼'
+            content: '▲';
         }
     }
 }
