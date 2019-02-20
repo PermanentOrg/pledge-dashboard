@@ -69,9 +69,13 @@ export class HomeComponent implements OnInit {
     });
 
     for (const list of [pledgesToday, pledgesWeek]) {
+      const count = list.length;
+
+      if (list.length === 1) {
+        list.unshift(this.progressData[this.progressData.length - 2]);
+      }
       const dollarAmounts = list.map(progress => progress.totalDollarAmount);
       const totalDollarAmount = Math.max(...dollarAmounts) - Math.min(...dollarAmounts);
-      const count = list.length;
 
       if (list === pledgesToday) {
         this.pledgesTodayCount = count;
