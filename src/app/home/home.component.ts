@@ -31,6 +31,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
     y: [],
     type: 'scatter'
   };
+  public pledgesChartLayout = {
+    xaxis: {
+      autorange: false,
+      range: [moment().subtract('3', 'd').toDate(), moment().toDate()]
+    },
+    yaxis: {
+      autorange: false,
+      range: [25000, 50000]
+    },
+    margin: {
+      l: 80,
+      r: 80,
+      t: 10,
+      b: 50
+    }
+  }
   public pledgesChartConfig = {
     displayModeBar: false
   };
@@ -69,6 +85,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   updateCharts() {
     this.pledgesChartData.x = this.progressData.map(progress => moment(progress.timestamp).toISOString());
     this.pledgesChartData.y = this.progressData.map(progress => progress.totalDollarAmount);
+
+    const latest = this.progressData[this.progressData.length - 1];
+    this.pledgesChartLayout.yaxis.range = [latest.totalDollarAmount - 1000, latest.totalDollarAmount + 1000];
   }
 
   countPledges() {
