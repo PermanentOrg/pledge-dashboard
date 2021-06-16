@@ -110,7 +110,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
       if (list.length === 1) {
         list.unshift(this.progressData[this.progressData.length - 2]);
+      } else if (!list.length) {
+        list.push({
+          totalDollarAmount: 0
+        })
       }
+
       const dollarAmounts = list.map(progress => progress.totalDollarAmount);
       const totalDollarAmount = Math.max(...dollarAmounts) - Math.min(...dollarAmounts);
 
