@@ -1,3 +1,43 @@
+# Pledge Dashboard
+*Editor for pledge/donation data stored in Firebase*
+
+___
+
+## History
+
+
+This was built off an Angular dashboard starter template as a way to (relatively) safely edit pledge data as stored in the [Firebase Realtime Database](https://firebase.google.com/docs/database), which is their big nasty JSON tree-based product. Their Cloud Firestore product is their newer database product which is more conventionally document-based but did not exist at the time!
+
+The project makes heavy use of the AngularFire library which provides helpers and wrappers for Firebase products.
+
+Since all pledge campaign data is stored in Firebase, there is no accompanying backend for this dashboard. All edits are done directly in Firebase, using their security rules and authentication to allow editing of the data that the general public does not have permission to do.
+
+Most specific questions about any of the pledge campaign functionality can probably be answered by the [Realtime Database docs](https://firebase.google.com/docs/database) and the [Cloud Function triggers docs](https://firebase.google.com/docs/functions/database-events). Data is written directly to the database by `web-app` (and also by this app!) and validated by schema and security rules set inside Firebase. When data is created or updated, Firebase triggers certain Cloud Functions we have set up that aggregate data, send emails– executed any arbitrary Javascript that we've registered.
+
+## Usage
+
+__NOTE: THIS PROJECT'S DEPENDENCIES REQUIRE NODE 10.X, USE `n` OR `nvm` TO SWITCH VERSIONS BEFORE INSTALLING OR BUILDING__
+
+This app was previously deployed on our IP-whitelisted `devops` server, and just like `web-app` or any non-SSR Angular app, compiles down to static assets. These can be thrown anywhere that allows for redirecting all paths that don't resolve to a file to `index.html` to allow Angular to route request properly. The Apache configs for `web-app` should be basically identical.
+
+It was previously deployed via the included script `deploy.sh`. This may or may not be useful! Nothing crazy going on there, but it's there :).
+
+In a pinch, the app can be run locally via `npm start` which starts the `ng serve` dev server, but by default this uses the `dev` credentials from `environment.ts`. You can override the configuration with the `--prod` flag which *should* pull from `environment.prod.ts`, and thusly, use production data.
+
+## Authentication
+
+Accounts are managed in each Firebase project dashboard. There is no account creation functionality in the app, and I believe that functionality is disabled outside of the dashboard as currently configured. The same security rules that protect the data in production protect the data here, so you should be safe to host this publicly if need be, but I wouldn't unless absolutely necessary. 
+
+Currently, the rules allow for anyone authenticated with an account to edit data. Very few accounts exist and only privileged users have accounts in the first place, so this should be sufficient, but you can update these rules in the Firebase dashboard if needed.
+
+
+
+
+
+
+
+*original README from dashboard template preserved below*
+
 # [Light Bootstrap Dashboard Angular](https://demos.creative-tim.com/light-bootstrap-dashboard-angular2/dashboard)
 [![version][version-badge]][CHANGELOG] ![license][license-badge]
 
