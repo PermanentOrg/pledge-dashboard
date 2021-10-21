@@ -26,14 +26,14 @@ In a pinch, the app can be run locally via `npm start` which starts the `ng serv
 
 ## Authentication
 
-Accounts are managed in each Firebase project dashboard. There is no account creation functionality in the app, and I believe that functionality is disabled outside of the dashboard as currently configured. The same security rules that protect the data in production protect the data here, so you should be safe to host this publicly if need be, but I wouldn't unless absolutely necessary. 
+Accounts are managed in each Firebase project dashboard. There is no account creation functionality in the app, and I believe that functionality is disabled outside of the dashboard as currently configured. The same security rules that protect the data in production protect the data here.
 
 Currently, the rules allow for anyone authenticated with an account to edit data. Very few accounts exist and only privileged users have accounts in the first place, so this should be sufficient, but you can update these rules in the Firebase dashboard if needed.
 
 
+## Hosting/Deploying
 
-
-
+To deploy this project, you'll need to use the [Firebase CLI](https://firebase.google.com/docs/cli). For Permanent developers, you need to authenticate with the Firebase CLI. From there you can run `firebase deploy --project ${PROJECT ID}`, substituting the correct Firebase project ID.
 
 
 *original README from dashboard template preserved below*
