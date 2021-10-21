@@ -20,20 +20,18 @@ __NOTE: THIS PROJECT'S DEPENDENCIES REQUIRE NODE 10.X, USE `n` OR `nvm` TO SWITC
 
 This app was previously deployed on our IP-whitelisted `devops` server, and just like `web-app` or any non-SSR Angular app, compiles down to static assets. These can be thrown anywhere that allows for redirecting all paths that don't resolve to a file to `index.html` to allow Angular to route request properly. The Apache configs for `web-app` should be basically identical.
 
-It was previously deployed via the included script `deploy.sh`. This may or may not be useful! Nothing crazy going on there, but it's there :).
-
 In a pinch, the app can be run locally via `npm start` which starts the `ng serve` dev server, but by default this uses the `dev` credentials from `environment.ts`. You can override the configuration with the `--prod` flag which *should* pull from `environment.prod.ts`, and thusly, use production data.
 
 ## Authentication
 
-Accounts are managed in each Firebase project dashboard. There is no account creation functionality in the app, and I believe that functionality is disabled outside of the dashboard as currently configured. The same security rules that protect the data in production protect the data here, so you should be safe to host this publicly if need be, but I wouldn't unless absolutely necessary. 
+Accounts are managed in each Firebase project dashboard. There is no account creation functionality in the app, and I believe that functionality is disabled outside of the dashboard as currently configured. The same security rules that protect the data in production protect the data here.
 
 Currently, the rules allow for anyone authenticated with an account to edit data. Very few accounts exist and only privileged users have accounts in the first place, so this should be sufficient, but you can update these rules in the Firebase dashboard if needed.
 
 
+## Hosting/Deploying
 
-
-
+To deploy this project, you'll need to use the [Firebase CLI](https://firebase.google.com/docs/cli). For Permanent developers, you need to authenticate with the Firebase CLI. From there you can run `firebase deploy --project ${PROJECT ID}`, substituting the correct Firebase project ID. This project hosts from the `/dist` directory. Make sure a successful build is run before deploying manually.
 
 
 *original README from dashboard template preserved below*

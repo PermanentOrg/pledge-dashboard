@@ -42,3 +42,7 @@ e2e/jasmine-results.json
 *.xml
 test-reports
 pledge-dashboard.tar.gz
+
+# Firebase stuff
+.firebase
+.firebaserc
