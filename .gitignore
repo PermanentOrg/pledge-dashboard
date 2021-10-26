@@ -46,3 +46,6 @@ pledge-dashboard.tar.gz
 # Firebase stuff
 .firebase
 .firebaserc
+
+# Act testing
+.secrets
